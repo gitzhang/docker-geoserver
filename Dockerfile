@@ -6,11 +6,15 @@ ARG JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 FROM tomcat:$IMAGE_VERSION
 
 LABEL maintainer="Tim Sutton<tim@linfiniti.com>"
+LABEL maintainer2="Jger<jger.zq@qq.com>"
 
 ARG GS_VERSION=2.18.0
 
 ARG WAR_URL=http://downloads.sourceforge.net/project/geoserver/GeoServer/${GS_VERSION}/geoserver-${GS_VERSION}-war.zip
 ARG STABLE_PLUGIN_URL=https://sourceforge.net/projects/geoserver/files/GeoServer/${GS_VERSION}/extensions
+
+# 切换国内镜像源
+ADD sources.list /etc/apt/sources.list
 
 #Install extra fonts to use with sld font markers
 RUN apt-get -y update; apt-get install -y fonts-cantarell lmodern ttf-aenigma ttf-georgewilliams ttf-bitstream-vera \
